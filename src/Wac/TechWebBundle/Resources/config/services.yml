@@ -1,0 +1,4 @@
+services:
+#    wac_tech_web.example:
+#        class: Wac\TechWebBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,7 +1,0 @@
-accounting_uploader_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: AccountingUploaderBundle:Default:index }
-
-accounting_uploader_upload:
-    path:     /upload
-    defaults: { _controller: AccountingUploaderBundle:Default:upload }

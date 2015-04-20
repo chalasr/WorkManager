@@ -1,4 +1,0 @@
-services:
-#    accounting_account.example:
-#        class: Accounting\AccountBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

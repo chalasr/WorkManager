@@ -1,14 +1,5 @@
-accounting_uploader:
-    resource: "@AccountingUploaderBundle/Resources/config/routing.yml"
-    prefix:   /
-
-accounting_user:
-    resource: "@AccountingUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-accounting_account:
-    resource: "@AccountingAccountBundle/Resources/config/routing.yml"
+wac_tech_web:
+    resource: "@WacTechWebBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user_security:

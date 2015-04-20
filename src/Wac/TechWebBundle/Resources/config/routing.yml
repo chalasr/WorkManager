@@ -1,0 +1,3 @@
+wac_tech_web_homepage:
+    path:     /
+    defaults: { _controller: WacTechWebBundle:Default:index }
