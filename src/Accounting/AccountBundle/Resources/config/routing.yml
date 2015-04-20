@@ -1,7 +1,0 @@
-accounting_account_account:
-    resource: "@AccountingAccountBundle/Resources/config/routing/account.yml"
-    prefix:   /account
-
-accounting_account_homepage:
-    path:     /
-    defaults: { _controller: AccountingAccountBundle:Default:index }
