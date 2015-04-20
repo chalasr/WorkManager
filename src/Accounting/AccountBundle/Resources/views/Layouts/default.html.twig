@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SutuCompta</title>
+    <link rel="stylesheet" href="{{ asset('bundles/accountingaccount/css/bootswatch.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/accountingaccount/css/main.css') }}" type="text/css" media="screen" />
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"> <img alt="sutunamlogo" class="sutulogo" src="{{ asset('bundles/accountingaccount/images/logo-sutu-transparent.png')}}"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            {% if app.user %}
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ app.user.username }} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/profile">Profil</a></li>
+                <li class="divider"></li>
+                <li><a href="/logout">Déconnexion</a></li>
+              </ul>
+            </li>
+            {% else %}
+              <li><a href="/register">Sign-up</a></li>
+              <li><a href="/login">Sign-in</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container content">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+    <script type="text/javascript" src="{{ asset('bundles/accountingaccount/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/accountingaccount/js/bootstrap.min.js') }}"></script>
+</body>
+</html>

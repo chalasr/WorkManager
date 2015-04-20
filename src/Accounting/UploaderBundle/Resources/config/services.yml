@@ -1,0 +1,4 @@
+services:
+#    accounting_uploader.example:
+#        class: Accounting\UploaderBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

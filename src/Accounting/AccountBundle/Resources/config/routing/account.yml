@@ -1,0 +1,30 @@
+account:
+    path:     /
+    defaults: { _controller: "AccountingAccountBundle:Account:index" }
+
+account_show:
+    path:     /{id}/show
+    defaults: { _controller: "AccountingAccountBundle:Account:show" }
+
+account_new:
+    path:     /new
+    defaults: { _controller: "AccountingAccountBundle:Account:new" }
+
+account_create:
+    path:     /create
+    defaults: { _controller: "AccountingAccountBundle:Account:create" }
+    methods:  POST
+
+account_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AccountingAccountBundle:Account:edit" }
+
+account_update:
+    path:     /{id}/update
+    defaults: { _controller: "AccountingAccountBundle:Account:update" }
+    methods:  [POST, PUT]
+
+account_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AccountingAccountBundle:Account:delete" }
+    methods:  [POST, DELETE]

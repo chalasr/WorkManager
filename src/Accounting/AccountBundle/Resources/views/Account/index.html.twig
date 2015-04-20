@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Liste des comptes bancaires</h1>
+
+    <table class="table records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('account_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>
+                        <a class="btn btn-default btn-sm" href="{{ path('account_show', { 'id': entity.id }) }}">show</a>
+                        <a class="btn btn-default btn-sm" href="{{ path('account_edit', { 'id': entity.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <a class="btn btn-default btn-sm" href="{{ path('account_new') }}">
+                Nouveau
+            </a>
+    {% endblock %}
