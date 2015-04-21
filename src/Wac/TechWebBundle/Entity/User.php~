@@ -18,6 +18,7 @@ class User extends BaseUser
     */
    protected $projects;
 
+
     /**
      * @var integer
      *
@@ -26,6 +27,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
 
     /**
      * Get id
