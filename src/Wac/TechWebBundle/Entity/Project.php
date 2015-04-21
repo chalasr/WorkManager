@@ -13,25 +13,36 @@ use Doctrine\ORM\Mapping as ORM;
 class Project
 {
   /**
-  * @ORM\OneToMany(targetEntity="Listing", mappedBy="project")
-  */
+   * @ORM\ManyToMany(targetEntity="User", inversedBy="projects", cascade={"persist"})
+   * @ORM\JoinTable(name="project_user",
+   *     joinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+   * )
+   *
+   * @var ArrayCollection $users
+   */
+    protected $users;
+
+  /**
+   * @ORM\OneToMany(targetEntity="Listing", mappedBy="project")
+   */
     protected $listings;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+  /**
+    * @var integer
+    *
+    * @ORM\Column(name="id", type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+  /**
+    * @var string
+    *
+    * @ORM\Column(name="name", type="string", length=255)
+    */
+    protected $name;
 
 
     /**
@@ -100,10 +111,43 @@ class Project
     /**
      * Get listings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getListings()
     {
         return $this->listings;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Wac\TechWebBundle\Entity\User $users
+     * @return Project
+     */
+    public function addUser(\Wac\TechWebBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Wac\TechWebBundle\Entity\User $users
+     */
+    public function removeUser(\Wac\TechWebBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
