@@ -1,3 +1,7 @@
+wac_tech_web_project:
+    resource: "@WacTechWebBundle/Resources/config/routing/project.yml"
+    prefix:   /project
+
 wac_tech_web_homepage:
     path:     /
     defaults: { _controller: WacTechWebBundle:Default:index }

@@ -2,23 +2,28 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>SutuCompta</title>
-    <link rel="stylesheet" href="{{ asset('bundles/accountingaccount/css/bootswatch.min.css') }}" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ asset('bundles/accountingaccount/css/main.css') }}" type="text/css" media="screen" />
+    <title>WorkManager</title>
+    <link rel="stylesheet" href="{{ asset('bundles/wactechweb/css/bootswatch.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/wactechweb/css/main.css') }}" type="text/css" media="screen" />
 </head>
 <body>
     <nav>
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="/">TechWeb</a>
+          <a class="navbar-brand" href="/">WorkManager</a>
           <ul class="nav navbar-nav navbar-right">
             {% if app.user %}
             <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ app.user.username }} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {{ app.user.username }}
+                <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/profile">Profil</a></li>
                 <li class="divider"></li>
-                <li><a href="/logout">Déconnexion</a></li>
+                <li>
+                  <a href="/logout">Déconnexion</a>
+                </li>
               </ul>
             </li>
             {% else %}
@@ -28,12 +33,12 @@
           </ul>
         </div>
       </nav>
-    <div class="container content">
+      <div class="container content">
         {% block body %}
 
         {% endblock %}
     </div>
-    <script type="text/javascript" src="{{ asset('bundles/accountingaccount/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/accountingaccount/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

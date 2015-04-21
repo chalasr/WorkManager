@@ -1,0 +1,30 @@
+project:
+    path:     /
+    defaults: { _controller: "WacTechWebBundle:Project:index" }
+
+project_show:
+    path:     /{id}/show
+    defaults: { _controller: "WacTechWebBundle:Project:show" }
+
+project_new:
+    path:     /new
+    defaults: { _controller: "WacTechWebBundle:Project:new" }
+
+project_create:
+    path:     /create
+    defaults: { _controller: "WacTechWebBundle:Project:create" }
+    methods:  POST
+
+project_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WacTechWebBundle:Project:edit" }
+
+project_update:
+    path:     /{id}/update
+    defaults: { _controller: "WacTechWebBundle:Project:update" }
+    methods:  [POST, PUT]
+
+project_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WacTechWebBundle:Project:delete" }
+    methods:  [POST, DELETE]

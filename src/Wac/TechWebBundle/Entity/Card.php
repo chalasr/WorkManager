@@ -12,6 +12,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Card
 {
+
+  /**
+    * @ORM\OneToMany(targetEntity="Task", mappedBy="card")
+    */
+    protected $tasks;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="Listing", inversedBy="cards")
+   * @ORM\JoinColumn(name="listing_id", referencedColumnName="id")
+   */
+   protected $listing;
+
     /**
      * @var integer
      *
@@ -39,7 +51,7 @@ class Card
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +74,7 @@ class Card
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -85,10 +97,73 @@ class Card
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set listing
+     *
+     * @param \Wac\TechWebBundle\Entity\Listing $listing
+     * @return Card
+     */
+    public function setListing(\Wac\TechWebBundle\Entity\Listing $listing = null)
+    {
+        $this->listing = $listing;
+
+        return $this;
+    }
+
+    /**
+     * Get listing
+     *
+     * @return \Wac\TechWebBundle\Entity\Listing
+     */
+    public function getListing()
+    {
+        return $this->listing;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \Wac\TechWebBundle\Entity\Task $tasks
+     * @return Card
+     */
+    public function addTask(\Wac\TechWebBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \Wac\TechWebBundle\Entity\Task $tasks
+     */
+    public function removeTask(\Wac\TechWebBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }
