@@ -16,7 +16,7 @@ class User extends BaseUser
     /**
     * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
     */
-   protected $projects;
+    protected $projects;
 
     /**
      * @var integer
@@ -41,6 +41,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
         $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

@@ -41,6 +41,8 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $currentUser= $this->get('security.context')->getToken()->getUser();
+            $entity->addUser($currentUser);
             $em->persist($entity);
             $em->flush();
 

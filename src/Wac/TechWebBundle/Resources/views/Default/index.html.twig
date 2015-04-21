@@ -1,5 +1,35 @@
 {% extends 'WacTechWebBundle::layout.html.twig' %}
 
 {% block body %}
-    Homepage.
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Projects</h3>
+      </div>
+      <table class="table table-hover" id="dev-table" >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Dead line</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+          <tr>
+            <td>{{ project.id }}</td>
+            <td>{{ project.name }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
