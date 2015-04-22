@@ -236,12 +236,11 @@ class ProjectController extends Controller
      {
        $em = $this->getDoctrine()->getManager();
        $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
-       $members = $project->getUsers();
        $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
-       if (!$project) {
-           throw $this->createNotFoundException('Unable to find Project.');
-       }
+       if (!$project) throw $this->createNotFoundException('Unable to find Project.');
+
        $addMemberForm = $this->createAddMemberForm($projectId);
+       $members = $project->getUsers();
 
        return $this->render('WacTechWebBundle:Project:members.html.twig', array(
            'users'      => $users,
@@ -268,27 +267,29 @@ class ProjectController extends Controller
      */
      public function addMemberAction(Request $request, $projectId)
      {
-         $em = $this->getDoctrine()->getManager();
+          $em = $this->getDoctrine()->getManager();
+          // $accessor = PropertyAccess::createPropertyAccessor();
 
-         $form = $this->createAddMemberForm($projectId);
-         $form->handleRequest($request);
-         $form = $request->request->get('form');
-         $user = $form['userId'];
-         $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
-         $members = $project->getUsers()->toArray();
-        //  dump($members); die();
+          $form = $this->createAddMemberForm($projectId);
+          $form->handleRequest($request);
+          $form = $request->request->get('form');
+          $user = $form['userId'];
+          $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+          $members = $project->getUsers()->toArray();
 
-         if (in_array(['id: '.$user], $members)) {
-             throw $this->createNotFoundException('Cet utilisateur est déjà membre du projet');
-         }
+          for($i = 0; $i < sizeof($members); $i++){
+            if ($members[$i]->getId() == $user) {
+                throw $this->createNotFoundException('Cet utilisateur est déjà membre du projet');
+            }
+          }
 
-         $member = $em->getRepository('WacTechWebBundle:User')->find($user);
-         $project->addUser($member);
+          $member = $em->getRepository('WacTechWebBundle:User')->find($user);
+          $project->addUser($member);
 
-         $em->persist($project);
-         $em->flush();
+          $em->persist($project);
+          $em->flush();
 
-         return $this->redirect($this->generateUrl('project_add_member', array('projectId' => $projectId)));
+          return $this->redirect($this->generateUrl('project_members', array('projectId' => $projectId)));
      }
 
      /**
