@@ -27,6 +27,11 @@
             Edit
         </a>
     </li>
+    <li>
+        <a href="{{ path('project_members', { 'projectId': entity.id }) }}">
+            Members
+        </a>
+    </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

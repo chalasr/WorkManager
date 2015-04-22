@@ -2,7 +2,7 @@ project:
     path:     /
     defaults: { _controller: "WacTechWebBundle:Project:index" }
 
-project:
+project_members:
     path:     /{projectId}/members
     defaults: { _controller: "WacTechWebBundle:Project:listMembers" }
 

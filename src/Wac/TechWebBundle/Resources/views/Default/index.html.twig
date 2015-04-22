@@ -17,6 +17,7 @@
                 <span class="home-actions">
                   <a class="btn btn-default btn-sm" href="{{ path('project_show', { 'id': project.id }) }}">Consulter</a>
                   <a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': project.id }) }}">Editer</a>
+                  <a class="btn btn-default btn-sm" href="{{ path('project_members', { 'projectId': project.id }) }}">Membres</a>
                 </span>
               </li>
               {% endfor %}
