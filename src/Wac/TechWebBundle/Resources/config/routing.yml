@@ -4,4 +4,4 @@ wac_tech_web_project:
 
 wac_tech_web_homepage:
     path:     /
-    defaults: { _controller: WacTechWebBundle:Default:index }
+    defaults: { _controller: WacTechWebBundle:Project:index }

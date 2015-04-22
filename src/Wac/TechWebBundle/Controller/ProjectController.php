@@ -21,13 +21,14 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+      $currentUser= $this->get('security.context')->getToken()->getUser();
 
-        $entities = $em->getRepository('WacTechWebBundle:Project')->findAll();
+      $em = $this->getDoctrine()->getManager();
 
-        return $this->render('WacTechWebBundle:Project:index.html.twig', array(
-            'entities' => $entities,
-        ));
+      $projects = $currentUser->getProjects();
+      return $this->render('WacTechWebBundle:Default:index.html.twig', array(
+          'projects' => $projects
+      ));
     }
     /**
      * Creates a new Project entity.
@@ -73,6 +74,42 @@ class ProjectController extends Controller
 
         return $form;
     }
+
+    public function listMembersAction($projectId)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+      $members = $project->getUsers();
+      $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
+      if (!$project) {
+          throw $this->createNotFoundException('Unable to find Project.');
+      }
+      return $this->render('WacTechWebBundle:Project:members.html.twig', array(
+          'users' => $users,
+          'members' => $members,
+      ));
+    }
+
+    // public function addMemberAction($projectId){
+    //   $em = $this->getDoctrine()->getManager();
+    //
+    //   $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+    //   $users = $em->getRepository('WacTechWebBundle:User')->findAll();
+    //
+    //   if (!$project) {
+    //       throw $this->createNotFoundException('Unable to find Project.');
+    //   }
+    //
+    //   $form = $this->createFormBuilder($newMember)
+    //     ->add('users')
+    //     ->add('save', 'submit', array('label' => 'Create Task'))
+    //     ->getForm();
+    //
+    //   return $this->render('default/new.html.twig', array(
+    //     'form' => $form->createView(),
+    //   ));
+    // }
 
     /**
      * Displays a form to create a new Project entity.

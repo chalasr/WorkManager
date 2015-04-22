@@ -3,32 +3,28 @@
 {% block body %}
 <div class="row">
   <div class="col-md-12">
-    <div class="panel panel-default">
+    <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Projects</h3>
+        <h3>Projects</h3>
       </div>
-      <table class="table table-hover" id="dev-table" >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Created at</th>
-            <th>Dead line</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for project in projects %}
-          <tr>
-            <td>{{ project.id }}</td>
-            <td>{{ project.name }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="tabaccount">
+            <ul class="list-group account-list">
+              {% for project in projects %}
+              <li class="list-group-item" onclick="location.href='{{ path('project_show', { 'id': project.id }) }}'">
+                <span class="account-name">#{{ project.id }} &nbsp;{{ project.name }}</span>
+                <span class="home-actions">
+                  <a class="btn btn-default btn-sm" href="{{ path('project_show', { 'id': project.id }) }}">Consulter</a>
+                  <a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': project.id }) }}">Editer</a>
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+            <a class="btn btn-default btn-sm" href="{{ path('project_new')}}">Nouveau</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

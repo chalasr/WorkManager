@@ -1,0 +1,52 @@
+{% extends 'WacTechWebBundle::layout.html.twig' %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <h3>Project Members</h3>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="tabaccount">
+            <ul class="list-group account-list">
+              {% for member in members %}
+              <li class="list-group-item">
+                <span class="account-name">#{{ member.id }} &nbsp;{{ member.username }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+            <a class="btn btn-default btn-sm" href="{{ path('project_new')}}">Nouveau</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <h3>All users</h3>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="tabaccount">
+            <ul class="list-group account-list">
+              {% for user in users %}
+              <li class="list-group-item">
+                <span class="account-name">#{{ user.id }} &nbsp;{{ user.username }}</span>
+                <span class="home-actions">
+                  <a class="btn btn-default btn-sm" href="{{ path('project_show', { 'id': user.id }) }}">Consulter</a>
+                  <a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': user.id }) }}">Editer</a>
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+            <a class="btn btn-default btn-sm" href="{{ path('project_new')}}">Nouveau</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
