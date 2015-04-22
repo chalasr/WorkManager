@@ -2,6 +2,7 @@
 
 namespace Wac\TechWebBundle\Controller;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -75,45 +76,9 @@ class ProjectController extends Controller
         return $form;
     }
 
-    public function listMembersAction($projectId)
-    {
-      $em = $this->getDoctrine()->getManager();
-
-      $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
-      $members = $project->getUsers();
-      $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
-      if (!$project) {
-          throw $this->createNotFoundException('Unable to find Project.');
-      }
-      return $this->render('WacTechWebBundle:Project:members.html.twig', array(
-          'users' => $users,
-          'members' => $members,
-      ));
-    }
-
-    // public function addMemberAction($projectId){
-    //   $em = $this->getDoctrine()->getManager();
-    //
-    //   $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
-    //   $users = $em->getRepository('WacTechWebBundle:User')->findAll();
-    //
-    //   if (!$project) {
-    //       throw $this->createNotFoundException('Unable to find Project.');
-    //   }
-    //
-    //   $form = $this->createFormBuilder($newMember)
-    //     ->add('users')
-    //     ->add('save', 'submit', array('label' => 'Create Task'))
-    //     ->getForm();
-    //
-    //   return $this->render('default/new.html.twig', array(
-    //     'form' => $form->createView(),
-    //   ));
-    // }
 
     /**
      * Displays a form to create a new Project entity.
-     *
      */
     public function newAction()
     {
@@ -128,7 +93,6 @@ class ProjectController extends Controller
 
     /**
      * Finds and displays a Project entity.
-     *
      */
     public function showAction($id)
     {
@@ -150,7 +114,6 @@ class ProjectController extends Controller
 
     /**
      * Displays a form to edit an existing Project entity.
-     *
      */
     public function editAction($id)
     {
@@ -260,4 +223,83 @@ class ProjectController extends Controller
             ->getForm()
         ;
     }
+
+  /**
+   * Members
+   */
+
+     /**
+      * Get all members by project entity
+      * @param $projectId The project entity id
+      */
+     public function listMembersAction($projectId)
+     {
+       $em = $this->getDoctrine()->getManager();
+       $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+       $members = $project->getUsers();
+       $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
+       if (!$project) {
+           throw $this->createNotFoundException('Unable to find Project.');
+       }
+       $addMemberForm = $this->createAddMemberForm($projectId);
+
+       return $this->render('WacTechWebBundle:Project:members.html.twig', array(
+           'users'      => $users,
+           'projectId'  => $projectId,
+           'members'    => $members,
+           'add_member' => $addMemberForm->createView(),
+       ));
+     }
+
+     /**
+      * Creates a form to add a member to project.
+      */
+     private function createAddMemberForm($projectId)
+     {
+         return $this->createFormBuilder()
+             ->setAction($this->generateUrl('project_add_member', array('projectId' => $projectId)))
+             ->setMethod('POST')
+             ->add('submit', 'submit', array('label' => 'Add selected user to project'))
+             ->getForm();
+     }
+
+     /**
+     *Add member to project
+     */
+     public function addMemberAction(Request $request, $projectId)
+     {
+         $em = $this->getDoctrine()->getManager();
+
+         $form = $this->createAddMemberForm($projectId);
+         $form->handleRequest($request);
+         $form = $request->request->get('form');
+         $user = $form['userId'];
+         $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+         $members = $project->getUsers()->toArray();
+        //  dump($members); die();
+
+         if (in_array(['id: '.$user], $members)) {
+             throw $this->createNotFoundException('Cet utilisateur est déjà membre du projet');
+         }
+
+         $member = $em->getRepository('WacTechWebBundle:User')->find($user);
+         $project->addUser($member);
+
+         $em->persist($project);
+         $em->flush();
+
+         return $this->redirect($this->generateUrl('project_add_member', array('projectId' => $projectId)));
+     }
+
+     /**
+      * Creates a form to add a member to project.
+      */
+     private function createRemoveMemberForm($projectId)
+     {
+         return $this->createFormBuilder()
+             ->setAction($this->generateUrl('project_remove_member', array('projectId' => $projectId)))
+             ->setMethod('DELETE')
+             ->add('submit', 'submit', array('label' => 'Remove'))
+             ->getForm();
+     }
 }
