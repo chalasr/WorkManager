@@ -1,5 +1,9 @@
-.tasksTable{
+.member-actions{
+  float: right;
+}
 
+.record_actions{
+  display:flex;
 }
 
 .account-list li:hover{

@@ -14,6 +14,7 @@
               {% for member in members %}
               <li class="list-group-item">
                 <span class="account-name">#{{ member.id }} &nbsp;{{ member.username }}</span>
+                <a class="member-actions btn btn-default btn-sm" href="#">Remove</a>
               </li>
               {% endfor %}
             </ul>

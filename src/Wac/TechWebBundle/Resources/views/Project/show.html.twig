@@ -42,17 +42,12 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('project') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('project_edit', { 'id': entity.id }) }}">
+        <a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
-        <a href="{{ path('project_members', { 'projectId': entity.id }) }}">
+        <a class="btn btn-default btn-sm" href="{{ path('project_members', { 'projectId': entity.id }) }}">
             Members
         </a>
     </li>
