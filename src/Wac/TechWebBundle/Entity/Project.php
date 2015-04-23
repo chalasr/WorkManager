@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
+
+  public function __toString()
+  {
+      return $this->getName();
+  }
+
   /**
    * @ORM\ManyToMany(targetEntity="User", inversedBy="projects", cascade={"persist"})
    * @ORM\JoinTable(name="project_user",
@@ -24,7 +30,7 @@ class Project
     protected $users;
 
   /**
-   * @ORM\OneToMany(targetEntity="Listing", mappedBy="project")
+   * @ORM\OneToMany(targetEntity="Listing", mappedBy="project",  cascade={"remove"})
    */
     protected $listings;
 

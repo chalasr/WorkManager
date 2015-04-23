@@ -1,0 +1,30 @@
+task:
+    path:     /
+    defaults: { _controller: "WacTechWebBundle:Task:index" }
+
+task_show:
+    path:     /{id}/show
+    defaults: { _controller: "WacTechWebBundle:Task:show" }
+
+task_new:
+    path:     /new
+    defaults: { _controller: "WacTechWebBundle:Task:new" }
+
+task_create:
+    path:     /create
+    defaults: { _controller: "WacTechWebBundle:Task:create" }
+    methods:  POST
+
+task_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WacTechWebBundle:Task:edit" }
+
+task_update:
+    path:     /{id}/update
+    defaults: { _controller: "WacTechWebBundle:Task:update" }
+    methods:  [POST, PUT]
+
+task_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WacTechWebBundle:Task:delete" }
+    methods:  [POST, DELETE]

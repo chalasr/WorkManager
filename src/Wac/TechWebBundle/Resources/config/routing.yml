@@ -1,3 +1,15 @@
+wac_tech_web_task:
+    resource: "@WacTechWebBundle/Resources/config/routing/task.yml"
+    prefix:   /task
+
+wac_tech_web_card:
+    resource: "@WacTechWebBundle/Resources/config/routing/card.yml"
+    prefix:   /card
+
+wac_tech_web_listing:
+    resource: "@WacTechWebBundle/Resources/config/routing/listing.yml"
+    prefix:   /listing
+
 wac_tech_web_project:
     resource: "@WacTechWebBundle/Resources/config/routing/project.yml"
     prefix:   /project
@@ -5,3 +17,7 @@ wac_tech_web_project:
 wac_tech_web_homepage:
     path:     /
     defaults: { _controller: WacTechWebBundle:Project:index }
+
+wac_tech_web_api:
+    resource: "@WacTechWebBundle/Resources/config/routing/api.yml"
+    prefix:   /api

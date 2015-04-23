@@ -1,15 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="records_actions">
+<a class="btn btn-default btn-sm" href="{{ path('listing_new') }}">New List</a>
+<a class="btn btn-default btn-sm" href="{{ path('card_new') }}">New Card</a>
+</div>
+
     <h1>#{{ entity.id }} &nbsp; {{ entity.name }}</h1>
 
-    <div class="row">
-  		<div class="col-md-12">
+    <div class="row" data-ng-init="showLists({{ entity.id }})">
+  		<div class="col-md-4" data-ng-repeat="list in lists">
   			<div class="panel panel-default">
   				<div class="panel-heading">
-  					<h3 class="panel-title">List #1</h3>
+  					<h3 class="panel-title"><% list.name %></h3>
   				</div>
-  				<table class="table" id="dev-table" >
+  				<table class="table">
   					<thead>
   						<tr>
   							<th>#</th>
@@ -20,20 +25,13 @@
   						</tr>
   					</thead>
   					<tbody>
-  						<tr>
-  							<td></td>
-  							<td></td>
+  						<tr data-ng-repeat="card in list.card">
+  							<td><% card.name %></td>
+  							<td><% card.description %></td>
   							<td></td>
   							<td><input type="checkbox"></td>
   							<td><a class="btn btn-default btn-sm" href="#">Remove</a></td>
   						</tr>
-              <tr>
-                <td><input style="width:200%;" type="text" name="name" value="" placeholder="New Task"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
   					</tbody>
   				</table>
   			</div>

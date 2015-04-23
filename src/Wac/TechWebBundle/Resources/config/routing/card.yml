@@ -1,0 +1,30 @@
+card:
+    path:     /
+    defaults: { _controller: "WacTechWebBundle:Card:index" }
+
+card_show:
+    path:     /{id}/show
+    defaults: { _controller: "WacTechWebBundle:Card:show" }
+
+card_new:
+    path:     /new
+    defaults: { _controller: "WacTechWebBundle:Card:new" }
+
+card_create:
+    path:     /create
+    defaults: { _controller: "WacTechWebBundle:Card:create" }
+    methods:  POST
+
+card_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WacTechWebBundle:Card:edit" }
+
+card_update:
+    path:     /{id}/update
+    defaults: { _controller: "WacTechWebBundle:Card:update" }
+    methods:  [POST, PUT]
+
+card_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WacTechWebBundle:Card:delete" }
+    methods:  [POST, DELETE]

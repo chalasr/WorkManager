@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="app">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>WorkManager</title>
     <link rel="stylesheet" href="{{ asset('bundles/wactechweb/css/bootswatch.min.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/wactechweb/css/main.css') }}" type="text/css" media="screen" />
 </head>
-<body>
+<body data-ng-controller="MainController">
     <nav>
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -41,5 +41,7 @@
     </div>
     <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wactechweb/js/app.js') }}"></script>
 </body>
 </html>

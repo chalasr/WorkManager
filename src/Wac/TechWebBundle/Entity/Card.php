@@ -13,8 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Card
 {
 
+  public function __toString()
+  {
+      return $this->getName();
+  }
+
   /**
-    * @ORM\OneToMany(targetEntity="Task", mappedBy="card")
+    * @ORM\OneToMany(targetEntity="Task", mappedBy="card",  cascade={"remove"})
     */
     protected $tasks;
 
@@ -160,7 +165,7 @@ class Card
     /**
      * Get tasks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTasks()
     {
