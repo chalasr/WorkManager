@@ -43,6 +43,7 @@ app.controller('MainController', function ($scope, Project) {
               Project.getLists(projectId)
                 .success(function(data){
                     $scope.lists = data;
+                    $scope.cardData[listId] = [];
                 })
                 .error(function(data){
                     console.log(data);
@@ -60,6 +61,7 @@ app.controller('MainController', function ($scope, Project) {
               Project.getLists(projectId)
                 .success(function(data){
                     $scope.lists = data;
+                    $scope.taskData = {};
                 })
                 .error(function(data){
                     console.log(data);

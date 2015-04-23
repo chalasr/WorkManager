@@ -44,7 +44,7 @@ class ListingController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('listing_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('project_show', array('id' => $entity->getProject()->getId())));
         }
 
         return $this->render('WacTechWebBundle:Listing:new.html.twig', array(
