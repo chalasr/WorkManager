@@ -15,9 +15,9 @@ use Wac\TechWebBundle\Entity\Task;
 class ApiController extends Controller
 {
     /**
-     * Lists all Operation entities by Account .
+     * Lists all Lists entities by Project .
      *
-     * @param $accountId account entity
+     * @param Project $projectId
      *
      * @return JsonResponse
     */
@@ -63,9 +63,9 @@ class ApiController extends Controller
 
 
     /**
-     * Update Operation entity
+     * Update Task entity
      *
-     * @param Operation $id the opration entity
+     * @param {number} $id
      *
      * @return JsonResponse
     */
@@ -88,6 +88,11 @@ class ApiController extends Controller
         return new JsonResponse($data, 200);
     }
 
+    /**
+     * New Card
+     * @param Object $listId Project List
+     * @return JsonResponse
+     */
     public function newCardAction($listId)
     {
       $em = $this->getDoctrine()->getManager();
@@ -97,9 +102,34 @@ class ApiController extends Controller
 
       $data = json_decode($request->getContent(), true);
       $listing = $em->getRepository('WacTechWebBundle:Listing')->find($listId);
+
       $card = new Card();
       $card->setName($data['name']);
       $card->setListing($listing);
+
+      $em->persist($card);
+      $em->flush();
+
+      return new JsonResponse($data, 200);
+    }
+
+    /**
+     * New Task
+     * @param [type] $listId [description]
+     */
+    public function newTaskAction($cardId)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $request = new MyRequest();
+      $request = $request->createFromGlobals();
+
+      $data = json_decode($request->getContent(), true);
+      $card = $em->getRepository('WacTechWebBundle:Card')->find($listId);
+
+      $task = new Task();
+      $task->setName($data['name']);
+      $task->setCard($card);
 
       $em->persist($card);
       $em->flush();

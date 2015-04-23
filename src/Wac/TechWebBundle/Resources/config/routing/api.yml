@@ -1,20 +1,27 @@
-listings_get:
+api_listings_get:
     pattern: /lists/{projectId}
     defaults: { _controller: "WacTechWebBundle:Api:getLists" }
     requirements:
         _format: json
         methods: GET
 
-task_done_put:
+api_task_done:
     pattern: /task/{id}
     defaults: { _controller: "WacTechWebBundle:Api:doneTask" }
     requirements:
         _format: json
         methods: PATCH
 
-card_api_new:
+api_card_new:
     pattern: /card/new/{listId}
     defaults: { _controller: "WacTechWebBundle:Api:newCard" }
+    requirements:
+        _format: json
+        methods: POST
+
+api_task_new:
+    pattern: /task/new/{cardId}
+    defaults: { _controller: "WacTechWebBundle:Api:newTask" }
     requirements:
         _format: json
         methods: POST

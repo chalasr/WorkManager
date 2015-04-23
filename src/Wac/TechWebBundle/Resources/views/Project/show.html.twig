@@ -53,6 +53,7 @@
                           </tr>
                         </tbody>
                       </table>
+											<li><input class="newInput" data-ng-model="taskData.name" type="text" ng-enter="newTask(card.id)"></li>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -65,7 +66,7 @@
 					</tr>
 				</tbody>
 			</table>
-      <li><input class="newInput" data-ng-model="cardData.name" type="text" ng-enter="newCard(list.id)"></li>
+      <li><input class="newInput" data-ng-model="cardData[list.id].name" type="text" ng-enter="newCard(list.id)"></li>
 		</div>
 	</div>
 </div>

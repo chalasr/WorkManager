@@ -17,6 +17,7 @@ app.controller('MainController', function ($scope, Project) {
     $scope.value =  [];
     $scope.update = [];
     $scope.cardData = {};
+    $scope.taskData = {};
 
   /**
    * Get value of task 'done' field
@@ -37,8 +38,24 @@ app.controller('MainController', function ($scope, Project) {
     };
 
     $scope.newCard = function(listId){
-        console.log($scope.cardData.name);
-        Project.createCard($scope.cardData, listId)
+        Project.createCard($scope.cardData[listId], listId)
+            .success(function(){
+              Project.getLists(projectId)
+                .success(function(data){
+                    $scope.lists = data;
+                })
+                .error(function(data){
+                    console.log(data);
+                });
+            })
+            .error(function(){
+                console.log(data);
+            });
+    };
+
+    $scope.newTask = function(cardId){
+        console.log($scope.taskData.name);
+        Project.createTask($scope.taskData, cardId)
             .success(function(){
               Project.getLists(projectId)
                 .success(function(data){
@@ -86,6 +103,14 @@ app.factory('Project', function($http){
               data: cardData
             });
         },
+        createTask : function(taskData, cardId) {
+            return $http({
+              method: 'POST',
+              url: '/api/card/new/' + cardId,
+              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+              data: taskData
+            });
+        },
         update : function(id, update) {
             return $http.patch('/api/task/' + id, update);
         }
@@ -93,15 +118,14 @@ app.factory('Project', function($http){
 });
 
 app.directive('ngEnter', function() {
-        return function(scope, element, attrs) {
-            element.bind("keydown keypress", function(event) {
-                if(event.which === 13) {
-                    scope.$apply(function(){
-                        scope.$eval(attrs.ngEnter, {'event': event});
-                    });
-
-                    event.preventDefault();
-                }
-            });
-        };
-    });
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'event': event});
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});
