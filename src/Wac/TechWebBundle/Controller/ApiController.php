@@ -4,7 +4,12 @@ namespace Wac\TechWebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
 use Wac\TechWebBundle\Component\MyRequest as MyRequest;
+use Wac\TechWebBundle\Entity\Card;
+use Wac\TechWebBundle\Entity\Listing;
+use Wac\TechWebBundle\Entity\Task;
 
 
 class ApiController extends Controller
@@ -20,34 +25,34 @@ class ApiController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+        $card = $em->getRepository('WacTechWebBundle:Card')->find(2);
 
         if (!$project) {
             throw $this->createNotFoundException('Projet non existant.');
         }
-        
+
         $listsByProject= $project->getListings();
         $listings = [];
 
         foreach ($listsByProject as $list) {
             $listings[$list->getId()] = [
-                'id'        => $list->getId(),
-                'name'      => $list->getName(),
+                'id'    => $list->getId(),
+                'name'  => $list->getName(),
             ];
 
             foreach($list->getCards() as $card){
-                $tab = [
+              $listings[$list->getId()]['cards'][$card->getId()] = [
                   'id'          => $card->getId(),
                   'name'        => $card->getName(),
                   'description' => $card->getDescription(),
                 ];
-                $listings[$list->getId()]['cards'][] = $tab;
 
                 foreach($card->getTasks() as $task){
-                    $tasksArray = [
+                  $listings[$list->getId()]['cards'][$card->getId()]['tasks'][$task->getId()] = [
                         'id'    =>  $task->getId(),
                         'name'  =>  $task->getName(),
+                        'done'  =>  $task->getDone(),
                     ];
-                    $listings[$list->getId()]['cards'][$card->getId()]['tasks'][] = $tasksArray;
                 }
             }
         }
@@ -56,41 +61,49 @@ class ApiController extends Controller
     }
 
 
-    //
-    // /**
-    //  * Update Operation entity
-    //  *
-    //  * @param Operation $id the opration entity
-    //  *
-    //  * @return JsonResponse
-    // */
-    // public function doneOperationAction($id)
-    // {
-    //     $em = $this->getDoctrine()->getManager();
-    //
-    //     $operation = $em->getRepository('AccountingAccountBundle:Operation')->find($id);
-    //
-    //     if (!$operation) {
-    //         throw $this->createNotFoundException('Operation non existante.');
-    //     }
-    //     $request = new MyRequest();
-    //     $request = $request->createFromGlobals();
-    //
-    //     $data = json_decode($request->getContent(), true);
-    //     $operation->setDone($data['done']);
-    //
-    //     $em->flush();
-    //
-    //     if ($this->get('security.context')->getToken()){
-    //         $user = $user = $this->get('security.context')->getToken()->getUser();
-    //         method_exists($user, 'getId') ? $user = $user->getUserName() : $user = 0;
-    //     }
-    //     $account = $operation->getAccount()->getId();
-    //     $data['done'] == 1 ? $logMsg = 'traitee' : $logMsg = 'non traitee';
-    //
-    //     $logger = $this->get('sutucompta_service.logger');
-    //     $logger->info(ucfirst($user).': Compte #'.$account.' - Operation #'.$id.' status: '.$logMsg);
-    //
-    //     return new JsonResponse($data);
-    // }
+
+    /**
+     * Update Operation entity
+     *
+     * @param Operation $id the opration entity
+     *
+     * @return JsonResponse
+    */
+    public function doneTaskAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $task = $em->getRepository('WacTechWebBundle:Task')->find($id);
+        if (!$task) {
+            throw $this->createNotFoundException("Task doesn't exist");
+        }
+
+        $request = new MyRequest();
+        $request = $request->createFromGlobals();
+
+        $data = json_decode($request->getContent(), true);
+        $task->setDone($data['done']);
+
+        $em->flush();
+
+        return new JsonResponse($data, 200);
+    }
+
+    public function newCardAction($listId)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $request = new MyRequest();
+      $request = $request->createFromGlobals();
+
+      $data = json_decode($request->getContent(), true);
+      $listing = $em->getRepository('WacTechWebBundle:Listing')->find($listId);
+      $card = new Card();
+      $card->setName($data['name']);
+      $card->setListing($listing);
+
+      $em->persist($card);
+      $em->flush();
+
+      return new JsonResponse($data, 200);
+    }
 }

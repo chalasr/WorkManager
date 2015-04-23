@@ -5,23 +5,16 @@ listings_get:
         _format: json
         methods: GET
 
-cards_get:
-    pattern: /cards/{listId}
-    defaults: { _controller: "WacTechWebBundle:Api:getCards" }
+task_done_put:
+    pattern: /task/{id}
+    defaults: { _controller: "WacTechWebBundle:Api:doneTask" }
     requirements:
         _format: json
-        methods: GET
+        methods: PATCH
 
-tasks_get:
-    pattern: /tasks/{cardId}
-    defaults: { _controller: "WacTechWebBundle:Api:getTasks" }
+card_api_new:
+    pattern: /card/new/{listId}
+    defaults: { _controller: "WacTechWebBundle:Api:newCard" }
     requirements:
         _format: json
-        methods: GET
-
-# operations_put:
-#     pattern: /list/{id}
-#     defaults: { _controller: "AccountingAccountBundle:API:doneOperation" }
-#     requirements:
-#         _format: json
-#         methods: PATCH
+        methods: POST

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Wac\TechWebBundle\Entity\Project;
+use Wac\TechWebBundle\Entity\Listing;
 use Wac\TechWebBundle\Form\ProjectType;
 
 /**
@@ -43,8 +44,25 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $todoList = new Listing();
+            $todoList->setName('To Do');
+            $todoList->setProject($entity);
+            $em->persist($todoList);
+
+            $doingList = new Listing();
+            $doingList->setName('Doing');
+            $doingList->setProject($entity);
+            $em->persist($doingList);
+
+            $doneList = new Listing();
+            $doneList->setName('Done');
+            $doneList->setProject($entity);
+            $em->persist($doneList);
+
             $currentUser= $this->get('security.context')->getToken()->getUser();
             $entity->addUser($currentUser);
+
             $em->persist($entity);
             $em->flush();
 

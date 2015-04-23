@@ -1,6 +1,6 @@
 <?php
 
-namespace Accounting\AccountBundle\Component;
+namespace Wac\TechWebBundle\Component;
 
 use Symfony\Component\HttpFoundation\Request;
 

@@ -1,73 +1,80 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>#{{ entity.id }} &nbsp; {{ entity.name }}</h1>
+<h1>#{{ entity.id }} &nbsp; {{ entity.name }}</h1>
+<div class="row" data-ng-init="showLists({{ entity.id }})">
+	<div class="col-md-4" data-ng-repeat="list in lists">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><% list.name %></h3>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Tasks</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="card in list.cards track by card.id">
+						<td><% card.name %></td>
+						<td><% card.description %></td>
+            <td>remove</td>
+						<td>
+              <button class="btn btn-default btn-sm" title="Card's Tasks" data-toggle="modal" data-target="#myModal<% card.id %>">
+                Tasks
+              </button>
 
-    <div class="row" data-ng-init="showLists({{ entity.id }})">
-  		<div class="col-md-4" data-ng-repeat="list in lists">
-  			<div class="panel panel-default">
-  				<div class="panel-heading">
-  					<h3 class="panel-title"><% list.name %></h3>
-  				</div>
-  				<table class="table table-hover">
-  					<thead>
-  						<tr>
-  							<th>#</th>
-  							<th>Name</th>
-  							<th>Description</th>
-                <th>Tasks</th>
-  							<th>Actions</th>
-  						</tr>
-  					</thead>
-  					<tbody>
-  						<tr data-ng-repeat="card in list.cards">
-  							<td><% card.id %></td>
-  							<td><% card.name %></td>
-  							<td><% card.description %></td>
-                <td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Tasks</button></td>
-                <!-- Button trigger modal -->
-
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><% card.name %></h4>
-                      </div>
-                      <div class="modal-body">
-                          lol lol 
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal<% card.id %>" tabindex="-1" role="dialog" aria-labelledby="myModal<% card.id %>Label" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title" id="myModal<% card.id %>Label"><% card.name %></h4>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr data-ng-repeat="task in card.tasks">
+                            <td><% task.id %></td>
+                            <td><% task.name %></td>
+                            <td>
+                              <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
-  							<td><a class="btn btn-default btn-sm" href="#">Remove</a></td>
-  						</tr>
-  					</tbody>
-  				</table>
-  			</div>
-  		</div>
-    </div>
+              </div>
+              <!--End Modal-->
+            </td>
+					</tr>
+				</tbody>
+			</table>
+      <li><input class="newInput" data-ng-model="cardData.name" type="text" ng-enter="newCard(list.id)"></li>
+		</div>
+	</div>
+</div>
 
 <ul class="record_actions">
-    <li>
-        <a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <a class="btn btn-default btn-sm" href="{{ path('project_members', { 'projectId': entity.id }) }}">
-            Members
-        </a>
-    </li>
-
-    <li>{{ form(delete_form) }}</li>&nbsp;&nbsp;
-    <li><a class="btn btn-default btn-sm" href="{{ path('listing_new') }}">New List</a></li>
-    <li><a class="btn btn-default btn-sm" href="{{ path('card_new') }}">New Card</a></li>
+  <li><a class="btn btn-default btn-sm" href="{{ path('project_edit', { 'id': entity.id }) }}">Edit</a></li>
+  <li><a class="btn btn-default btn-sm" href="{{ path('project_members', { 'projectId': entity.id }) }}">Members</a></li>
+  <li>{{ form(delete_form) }}</li>&nbsp;&nbsp;
+  <li><a class="btn btn-default btn-sm" href="{{ path('listing_new') }}">New List</a></li>
+  <li><a class="btn btn-default btn-sm" href="{{ path('card_new') }}">New Card</a></li>
 </ul>
-
 {% endblock %}
