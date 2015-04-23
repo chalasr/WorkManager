@@ -255,16 +255,18 @@ class ProjectController extends Controller
        $em = $this->getDoctrine()->getManager();
        $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
        $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
+       $members = $project->getUsers();
        if (!$project) throw $this->createNotFoundException('Unable to find Project.');
 
        $addMemberForm = $this->createAddMemberForm($projectId);
-       $members = $project->getUsers();
+       $removeMemberForm = $this->createRemoveMemberForm($projectId);
 
        return $this->render('WacTechWebBundle:Project:members.html.twig', array(
-           'users'      => $users,
-           'projectId'  => $projectId,
-           'members'    => $members,
-           'add_member' => $addMemberForm->createView(),
+           'users'         => $users,
+           'projectId'     => $projectId,
+           'members'       => $members,
+           'add_member'    => $addMemberForm->createView(),
+           'remove_member' => $removeMemberForm->createView(),
        ));
      }
 
@@ -286,7 +288,6 @@ class ProjectController extends Controller
      public function addMemberAction(Request $request, $projectId)
      {
           $em = $this->getDoctrine()->getManager();
-          // $accessor = PropertyAccess::createPropertyAccessor();
 
           $form = $this->createAddMemberForm($projectId);
           $form->handleRequest($request);
@@ -321,4 +322,29 @@ class ProjectController extends Controller
              ->add('submit', 'submit', array('label' => 'Remove'))
              ->getForm();
      }
+
+     /**
+     *Add member to project
+     */
+     public function removeMemberAction(Request $request, $projectId)
+     {
+          $em = $this->getDoctrine()->getManager();
+
+          $form = $this->createRemoveMemberForm($projectId);
+          $form->handleRequest($request);
+          $form = $request->request->get('form');
+          $user = $form['userId'];
+          $member = $em->getRepository('WacTechWebBundle:User')->find($user);
+
+          $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
+          $members = $project->getUsers()->toArray();
+
+          $project->removeUser($member);
+
+          $em->persist($project);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('project_members', array('projectId' => $projectId)));
+     }
+
 }

@@ -10,6 +10,10 @@ project_add_member:
     path:     /{projectId}/addMember/
     defaults: { _controller: "WacTechWebBundle:Project:addMember" }
 
+project_remove_member:
+    path:     /{projectId}/removeMember/
+    defaults: { _controller: "WacTechWebBundle:Project:removeMember" }
+
 project_show:
     path:     /{id}/show
     defaults: { _controller: "WacTechWebBundle:Project:show" }
