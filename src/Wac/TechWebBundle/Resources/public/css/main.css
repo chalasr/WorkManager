@@ -1,3 +1,7 @@
+.cardhover:hover{
+  cursor:pointer;
+}
+
 .newInput{
   width: 100%;
 }

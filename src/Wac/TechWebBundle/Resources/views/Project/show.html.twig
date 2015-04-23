@@ -13,7 +13,6 @@
 					<tr>
 						<th>Name</th>
 						<th>Description</th>
-						<th>Tasks</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -21,12 +20,10 @@
 					<tr data-ng-repeat="card in list.cards track by card.id">
 						<td><% card.name %></td>
 						<td><% card.description %></td>
-            <td>remove</td>
 						<td>
               <button class="btn btn-default btn-sm" title="Card's Tasks" data-toggle="modal" data-target="#myModal<% card.id %>">
-                Tasks
+              		Checklist
               </button>
-
               <!-- Modal -->
               <div class="modal fade" id="myModal<% card.id %>" tabindex="-1" role="dialog" aria-labelledby="myModal<% card.id %>Label" aria-hidden="true">
                 <div class="modal-dialog">
@@ -53,7 +50,7 @@
                           </tr>
                         </tbody>
                       </table>
-											<li><input class="newInput" data-ng-model="taskData.name" type="text" ng-enter="newTask(card.id)"></li>
+											<li><input class="newInput" data-ng-model="taskData.name" type="text" ng-enter="newTask(card.id)" placeholder="New Card ..."></li>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -66,7 +63,7 @@
 					</tr>
 				</tbody>
 			</table>
-      <li><input class="newInput" data-ng-model="cardData[list.id].name" type="text" ng-enter="newCard(list.id)"></li>
+      <li><input class="newInput" data-ng-model="cardData[list.id].name" type="text" ng-enter="newCard(list.id)" placeholder="New Task ..."></li>
 		</div>
 	</div>
 </div>
