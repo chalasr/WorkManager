@@ -40,7 +40,7 @@ class Task
      *
      * @ORM\Column(name="done", type="boolean")
      */
-    protected $done;
+    protected $done = false;
 
 
     /**

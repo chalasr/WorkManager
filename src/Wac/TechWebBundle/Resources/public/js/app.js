@@ -106,7 +106,7 @@ app.factory('Project', function($http){
         createTask : function(taskData, cardId) {
             return $http({
               method: 'POST',
-              url: '/api/card/new/' + cardId,
+              url: '/api/task/new/' + cardId,
               headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
               data: taskData
             });

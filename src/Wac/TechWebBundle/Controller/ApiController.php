@@ -125,13 +125,13 @@ class ApiController extends Controller
       $request = $request->createFromGlobals();
 
       $data = json_decode($request->getContent(), true);
-      $card = $em->getRepository('WacTechWebBundle:Card')->find($listId);
+      $card = $em->getRepository('WacTechWebBundle:Card')->find($cardId);
 
       $task = new Task();
       $task->setName($data['name']);
       $task->setCard($card);
 
-      $em->persist($card);
+      $em->persist($task);
       $em->flush();
 
       return new JsonResponse($data, 200);
