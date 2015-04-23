@@ -24,89 +24,38 @@ class ApiController extends Controller
         if (!$project) {
             throw $this->createNotFoundException('Projet non existant.');
         }
+        
         $listsByProject= $project->getListings();
         $listings = [];
 
-
-        // foreach ($listsByProject as $list) {
-        //     $listings[$list->getId()] = [
-        //         'id'        => $list->getId(),
-        //         'name'      => $list->getName(),
-        //         'cards'     => ['name' => $list->getCards()]
-        //     ];
-        //
-        //   foreach($list->getCards() as $card){
-        //       $listings[$list->getId()]['card'] = [
-        //           'id'    => $card->getId(),
-        //           'name'  => $card->getName()
-        //       ]
-        //   }
-        // }
-        //
         foreach ($listsByProject as $list) {
             $listings[$list->getId()] = [
                 'id'        => $list->getId(),
                 'name'      => $list->getName(),
-                'cards'     => []
             ];
 
-          foreach($list->getCards() as $card){
-            $tab = [
-              'id'    => $card->getId(),
-              'name'  => $card->getName()
-            ];
-            $listings[$list->getId()]['card'][] = $tab;
-          }
+            foreach($list->getCards() as $card){
+                $tab = [
+                  'id'          => $card->getId(),
+                  'name'        => $card->getName(),
+                  'description' => $card->getDescription(),
+                ];
+                $listings[$list->getId()]['cards'][] = $tab;
+
+                foreach($card->getTasks() as $task){
+                    $tasksArray = [
+                        'id'    =>  $task->getId(),
+                        'name'  =>  $task->getName(),
+                    ];
+                    $listings[$list->getId()]['cards'][$card->getId()]['tasks'][] = $tasksArray;
+                }
+            }
         }
-
 
         return new JsonResponse($listings);
     }
 
-    //getCardsByList
-    public function getCardsAction($listId)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $listing = $em->getRepository('WacTechWebBundle:Listing')->find($listId);
 
-        if (!$listing) {
-            throw $this->createNotFoundException('Listing non existant.');
-        }
-        $cardsByList= $listing->getCards();
-        $cards = [];
-
-        foreach ($cardsByList as $card) {
-            $cards[$card->getId()] = [
-                'id'           => $card->getId(),
-                'name'         => $card->getName(),
-                'description'  => $card->getDescription(),
-            ];
-        }
-
-        return new JsonResponse($cards);
-    }
-
-    public function getTasksAction($cardId)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $card = $em->getRepository('WacTechWebBundle:Card')->find($cardId);
-
-        if (!$card) {
-            throw $this->createNotFoundException('Listing non existant.');
-        }
-        $tasksByCard= $card->getTasks();
-        $tasks = [];
-
-        foreach ($tasksByCard as $task) {
-            $tasks[$card->getId()] = [
-                'id'    => $task->getId(),
-                'name'  => $task->getName(),
-                'done'  => $task->getDone(),
-            ];
-        }
-
-        return new JsonResponse($tasks);
-    }
     //
     // /**
     //  * Update Operation entity

@@ -1,11 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<div class="records_actions">
-<a class="btn btn-default btn-sm" href="{{ path('listing_new') }}">New List</a>
-<a class="btn btn-default btn-sm" href="{{ path('card_new') }}">New Card</a>
-</div>
-
     <h1>#{{ entity.id }} &nbsp; {{ entity.name }}</h1>
 
     <div class="row" data-ng-init="showLists({{ entity.id }})">
@@ -14,22 +9,42 @@
   				<div class="panel-heading">
   					<h3 class="panel-title"><% list.name %></h3>
   				</div>
-  				<table class="table">
+  				<table class="table table-hover">
   					<thead>
   						<tr>
   							<th>#</th>
-  							<th>Task</th>
-  							<th>Author</th>
-  							<th>Status</th>
+  							<th>Name</th>
+  							<th>Description</th>
+                <th>Tasks</th>
   							<th>Actions</th>
   						</tr>
   					</thead>
   					<tbody>
-  						<tr data-ng-repeat="card in list.card">
+  						<tr data-ng-repeat="card in list.cards">
+  							<td><% card.id %></td>
   							<td><% card.name %></td>
   							<td><% card.description %></td>
-  							<td></td>
-  							<td><input type="checkbox"></td>
+                <td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Tasks</button></td>
+                <!-- Button trigger modal -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><% card.name %></h4>
+                      </div>
+                      <div class="modal-body">
+                          lol lol 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
   							<td><a class="btn btn-default btn-sm" href="#">Remove</a></td>
   						</tr>
   					</tbody>
@@ -49,6 +64,10 @@
             Members
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+
+    <li>{{ form(delete_form) }}</li>&nbsp;&nbsp;
+    <li><a class="btn btn-default btn-sm" href="{{ path('listing_new') }}">New List</a></li>
+    <li><a class="btn btn-default btn-sm" href="{{ path('card_new') }}">New Card</a></li>
 </ul>
+
 {% endblock %}
