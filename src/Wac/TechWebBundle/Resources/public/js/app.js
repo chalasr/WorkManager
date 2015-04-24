@@ -55,13 +55,28 @@ app.controller('MainController', function ($scope, Project) {
     };
 
     $scope.newTask = function(cardId){
-        console.log($scope.taskData.name);
         Project.createTask($scope.taskData, cardId)
             .success(function(){
               Project.getLists(projectId)
                 .success(function(data){
                     $scope.lists = data;
                     $scope.taskData = {};
+                })
+                .error(function(data){
+                    console.log(data);
+                });
+            })
+            .error(function(){
+                console.log(data);
+            });
+    };
+
+    $scope.removeCard = function(id){
+        Project.deleteCard(id)
+            .success(function(){
+              Project.getLists(projectId)
+                .success(function(data){
+                    $scope.lists = data;
                 })
                 .error(function(data){
                     console.log(data);
@@ -113,6 +128,9 @@ app.factory('Project', function($http){
               data: taskData
             });
         },
+        deleteCard : function(id) {
+  				return $http.delete('/api/card/' + id + '/delete');
+  			},
         update : function(id, update) {
             return $http.patch('/api/task/' + id, update);
         }

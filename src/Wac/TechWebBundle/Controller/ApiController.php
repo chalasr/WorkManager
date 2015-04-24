@@ -115,7 +115,7 @@ class ApiController extends Controller
 
     /**
      * New Task
-     * @param [type] $listId [description]
+     * @param {number} $cardId
      */
     public function newTaskAction($cardId)
     {
@@ -135,5 +135,21 @@ class ApiController extends Controller
       $em->flush();
 
       return new JsonResponse($data, 200);
+    }
+
+
+    /**
+     * Remove Card
+     * @param {number} $listId
+     */
+    public function removeCardAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $card = $em->getRepository('WacTechWebBundle:Card')->find($id);
+
+      $em->remove($card);
+      $em->flush();
+
+      return new JsonResponse('card'.$id.'removed', 200);
     }
 }
