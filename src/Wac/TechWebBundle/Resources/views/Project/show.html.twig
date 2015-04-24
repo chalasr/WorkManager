@@ -12,7 +12,7 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Actions</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +37,7 @@
                           <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,7 @@
                             <td><% task.name %></td>
                             <td>
                               <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)">
+															<a href="#" class="btn btn-sm btn-default" data-ng-click="removeTask(task.id)">Remove</a>
                             </td>
                           </tr>
                         </tbody>

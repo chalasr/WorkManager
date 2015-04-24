@@ -87,6 +87,22 @@ app.controller('MainController', function ($scope, Project) {
             });
     };
 
+    $scope.removeTask = function(id){
+        Project.deleteTask(id)
+            .success(function(){
+              Project.getLists(projectId)
+                .success(function(data){
+                    $scope.lists = data;
+                })
+                .error(function(data){
+                    console.log(data);
+                });
+            })
+            .error(function(){
+                console.log(data);
+            });
+    };
+
     $scope.complete = function(id) {
         $scope.update = $scope.value[id];
         Project.update(id, $scope.update)
@@ -130,6 +146,9 @@ app.factory('Project', function($http){
         },
         deleteCard : function(id) {
   				return $http.delete('/api/card/' + id + '/delete');
+  			},
+        deleteTask : function(id) {
+  				return $http.delete('/api/task/' + id + '/delete');
   			},
         update : function(id, update) {
             return $http.patch('/api/task/' + id, update);

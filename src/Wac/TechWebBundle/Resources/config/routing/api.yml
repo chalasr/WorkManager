@@ -26,6 +26,13 @@ api_card_remove:
         _format: json
         methods: DELETE
 
+api_task_remove:
+    pattern: /task/{id}/delete
+    defaults: { _controller: "WacTechWebBundle:Api:removeTask" }
+    requirements:
+        _format: json
+        methods: DELETE
+
 api_task_new:
     pattern: /task/new/{cardId}
     defaults: { _controller: "WacTechWebBundle:Api:newTask" }

@@ -14,7 +14,7 @@ class Task
 {
 
   /**
-   * @ORM\ManyToOne(targetEntity="Card", inversedBy="tasks", cascade={"remove"})
+   * @ORM\ManyToOne(targetEntity="Card", inversedBy="tasks")
    * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
    */
     protected $card;
