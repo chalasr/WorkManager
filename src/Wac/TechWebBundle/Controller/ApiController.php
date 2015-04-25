@@ -41,14 +41,14 @@ class ApiController extends Controller
             ];
 
             foreach($list->getCards() as $card){
-              $listings[$list->getId()]['cards'][$card->getId()] = [
+                $listings[$list->getId()]['cards'][$card->getId()] = [
                   'id'          => $card->getId(),
                   'name'        => $card->getName(),
                   'description' => $card->getDescription(),
                 ];
 
                 foreach($card->getTasks() as $task){
-                  $listings[$list->getId()]['cards'][$card->getId()]['tasks'][$task->getId()] = [
+                    $listings[$list->getId()]['cards'][$card->getId()]['tasks'][$task->getId()] = [
                         'id'    =>  $task->getId(),
                         'name'  =>  $task->getName(),
                         'done'  =>  $task->getDone(),
@@ -59,8 +59,6 @@ class ApiController extends Controller
 
         return new JsonResponse($listings);
     }
-
-
 
     /**
      * Update Task entity
@@ -101,6 +99,7 @@ class ApiController extends Controller
       $request = $request->createFromGlobals();
 
       $data = json_decode($request->getContent(), true);
+      // dump($data);die();
       $listing = $em->getRepository('WacTechWebBundle:Listing')->find($listId);
 
       $card = new Card();

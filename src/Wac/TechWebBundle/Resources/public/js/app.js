@@ -19,9 +19,6 @@ app.controller('MainController', function ($scope, Project) {
     $scope.cardData = {};
     $scope.taskData = {};
 
-  /**
-   * Get value of task 'done' field
-   */
     $scope.isDone = function(done, id){
         done == true ? $scope.value[id] = {done: true} : $scope.value[id] = {done: false};
         return $scope.value[id].done;
@@ -43,13 +40,13 @@ app.controller('MainController', function ($scope, Project) {
               Project.getLists(projectId)
                 .success(function(data){
                     $scope.lists = data;
-                    $scope.cardData[listId] = [];
+                    $scope.cardData = {};
                 })
                 .error(function(data){
                     console.log(data);
                 });
             })
-            .error(function(){
+            .error(function(data){
                 console.log(data);
             });
     };
@@ -66,7 +63,7 @@ app.controller('MainController', function ($scope, Project) {
                     console.log(data);
                 });
             })
-            .error(function(){
+            .error(function(data){
                 console.log(data);
             });
     };
@@ -137,6 +134,7 @@ app.factory('Project', function($http){
             });
         },
         createTask : function(taskData, cardId) {
+          // return $http.post('/api/task/new' + cardId, taskData);
             return $http({
               method: 'POST',
               url: '/api/task/new/' + cardId,
