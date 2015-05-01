@@ -256,6 +256,14 @@ class ProjectController extends Controller
        $project = $em->getRepository('WacTechWebBundle:Project')->find($projectId);
        $users   = $em->getRepository('WacTechWebBundle:User')->findAll();
        $members = $project->getUsers();
+       $membersArray = $members->toArray();
+       $countUsers = count($members);
+       for($i = 0; $i < $countUsers; $i++){
+       $member = $membersArray[$i]->getUsername();
+       $user = $users[$i]->getUsername();
+         if($user == $member)
+            unset($users[$i]);
+       }
        if (!$project) throw $this->createNotFoundException('Unable to find Project.');
 
        $addMemberForm = $this->createAddMemberForm($projectId);
