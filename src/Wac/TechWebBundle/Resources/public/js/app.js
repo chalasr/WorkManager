@@ -4,7 +4,7 @@ function($interpolateProvider){
     $interpolateProvider.endSymbol('%>');
 });
 
-var input, from, to, items, done, listId;
+var input, from, to, items, done, listId, key, value;
 var uri = window.location.href.split('/');
 var projectId = uri[4];
 
@@ -143,10 +143,10 @@ app.factory('Project', function($http){
             });
         },
         deleteCard : function(id) {
-  				return $http.delete('/api/card/' + id + '/delete');
+  				  return $http.delete('/api/card/' + id + '/delete');
   			},
         deleteTask : function(id) {
-  				return $http.delete('/api/task/' + id + '/delete');
+  				  return $http.delete('/api/task/' + id + '/delete');
   			},
         update : function(id, update) {
             return $http.patch('/api/task/' + id, update);

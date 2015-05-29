@@ -1,3 +1,7 @@
+.completedTask{
+  text-decoration: line-through;
+}
+
 .cardhover:hover{
   cursor:pointer;
 }

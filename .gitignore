@@ -2,6 +2,7 @@
 /app/cache/*
 !app/cache/.gitkeep
 /app/config/parameters.yml
+/app/config/deploy.rb
 /app/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
