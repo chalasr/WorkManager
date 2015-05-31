@@ -85,6 +85,7 @@ app.controller('MainController', function ($scope, Project) {
     };
 
     $scope.removeTask = function(id){
+        $('.' + id).fadeOut();
         Project.deleteTask(id)
             .success(function(){
               Project.getLists(projectId)

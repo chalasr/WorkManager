@@ -74,6 +74,12 @@
   }
 }
 
+@media (max-width: 600px) {
+  .list-group-item {
+    min-height: 115px;
+  }
+}
+
 .account-title{
     float:left;
 }

@@ -42,10 +42,10 @@
                         </thead>
                         <tbody>
                           <tr data-ng-repeat="task in card.tasks">
-                            <td ng-if="(task.done == true)" class="completedTask"><% task.id %></td>
-                            <td ng-if="(task.done == false)"><% task.id %></td>
-                            <td ng-if="(task.done == true)" class="completedTask"><% task.name %></td>
-                            <td ng-if="(task.done == false)"><% task.name %></td>
+                            <td id="<% task.id %>" ng-if="(task.done == true)" class="completedTask"><% task.id %></td>
+                            <td id="<% task.id %>" ng-if="(task.done == false)"><% task.id %></td>
+                            <td id="<% task.id %>" ng-if="(task.done == true)" class="completedTask"><% task.name %></td>
+                            <td id="<% task.id %>" ng-if="(task.done == false)"><% task.name %></td>
                             <td>
                               <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)">
 															<a href="#" class="btn btn-sm btn-default" data-ng-click="removeTask(task.id)">Remove</a>
