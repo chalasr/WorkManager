@@ -44,7 +44,7 @@
                           <tr data-ng-repeat="task in card.tasks">
                             <td id="<% task.id %>" ng-if="(task.done == true)" class="completedTask" contenteditable="true" ng-focus="focusTask(task.id)" ng-blur="blurTask(task.id)"><% task.name %>
 														</td>
-                            <td id="<% task.id %>" ng-if="(task.done == false)" contenteditable="true" ng-focus="showRemoveBtn(task.id)" ng-blur="hideRemoveBtn(task.id)"><% task.name %>
+                            <td id="<% task.id %>" ng-if="(task.done == false)" contenteditable="true" ng-focus="focusTask(task.id)" ng-blur="blurTask(task.id)"><% task.name %>
 														</td>
                             <td>
                               <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)" id="complete-<% task.id %>">
