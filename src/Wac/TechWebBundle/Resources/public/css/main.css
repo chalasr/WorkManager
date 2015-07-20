@@ -1,23 +1,15 @@
-table {
-    border-collapse: collapse;
+*:focus{
+  outline: none!important;
 }
 
-td {
-    position: relative;
-    padding: 5px 10px;
-}
-
-tr.strikeout td:before {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    border-bottom: 1px solid rgba(17, 17, 17, 0.81);
-    width: 100%;
+input[type="checkbox"]:checked:after, .checkbox input[type="checkbox"]:checked:after, .checkbox-inline input[type="checkbox"]:checked:after {
+  background-color: #757575 !important;
+  border-color: #666666 !important;
 }
 
 .completedTask{
   text-decoration: line-through;
+  font-style: italic;
 }
 
 .cardhover:hover{

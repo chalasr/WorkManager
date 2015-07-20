@@ -6,6 +6,7 @@ function($interpolateProvider){
 
 var input, from, to, items, done, listId, key, value;
 var uri = window.location.href.split('/');
+$('.removeTask').hide();
 var projectId = uri[4];
 
 app.controller('MainController', function ($scope, Project) {
@@ -116,6 +117,18 @@ app.controller('MainController', function ($scope, Project) {
             .error(function(data){
                 console.log(data);
             });
+    };
+
+    $scope.showRemoveBtn = function(id){
+        $('#complete-'+id+'').hide();
+        $('#remove-'+id+'').show();
+        $('#'+id+'').removeClass('completedTask');
+    };
+
+    $scope.hideRemoveBtn = function(id){
+        $('#remove-'+id+'').hide();
+        $('#complete-'+id+'').show();
+        $('#'+id+'').addClass('completedTask');
     };
 
 });

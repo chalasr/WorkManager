@@ -1,6 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<style media="screen">
+	td{
+		width: 100%;
+	}
+</style>
 <h1>#{{ entity.id }} &nbsp; {{ entity.name }}</h1>
 <div class="row" data-ng-init="showLists({{ entity.id }})">
 	<div class="col-md-4" data-ng-repeat="list in lists">
@@ -34,21 +39,16 @@
                     <div class="modal-body">
                       <table class="table">
                         <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th></th>
-                          </tr>
                         </thead>
                         <tbody>
                           <tr data-ng-repeat="task in card.tasks">
-                            <td id="<% task.id %>" ng-if="(task.done == true)" class="strikeout"><% task.id %></td>
-                            <td id="<% task.id %>" ng-if="(task.done == false)"><% task.id %></td>
-                            <td id="<% task.id %>" ng-if="(task.done == true)" class="strikeout"><% task.name %></td>
-                            <td id="<% task.id %>" ng-if="(task.done == false)"><% task.name %></td>
+                            <td id="<% task.id %>" ng-if="(task.done == true)" class="completedTask" contenteditable="true" ng-focus="showRemoveBtn(task.id)" ng-blur="hideRemoveBtn(task.id)"><% task.name %>
+														</td>
+                            <td id="<% task.id %>" ng-if="(task.done == false)" contenteditable="true" ng-focus="showRemoveBtn(task.id)" ng-blur="hideRemoveBtn(task.id)"><% task.name %>
+														</td>
                             <td>
-                              <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)">
-															<a href="#" class="btn btn-sm btn-default" data-ng-click="removeTask(task.id)">Remove</a>
+                              <input type="checkbox" data-ng-init="isDone(task.done, task.id)" data-ng-model="value[task.id].done" data-ng-change="complete(task.id)" id="complete-<% task.id %>">
+															<a href="#" class="btn btn-xs btn-default removeTask" id="remove-<% task.id %>" data-ng-click="removeTask(task.id)"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
                           </tr>
                         </tbody>
