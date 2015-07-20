@@ -119,16 +119,16 @@ app.controller('MainController', function ($scope, Project) {
             });
     };
 
-    $scope.showRemoveBtn = function(id){
+    $scope.focusTask = function(id){
         $('#complete-'+id+'').hide();
         $('#remove-'+id+'').show();
-        $('#'+id+'').removeClass('completedTask');
+        $('#'+id+'').addClass('onEdit');
     };
 
-    $scope.hideRemoveBtn = function(id){
+    $scope.blurTask = function(id){
         $('#remove-'+id+'').hide();
         $('#complete-'+id+'').show();
-        $('#'+id+'').addClass('completedTask');
+        $('#'+id+'').removeClass('onEdit');
     };
 
 });

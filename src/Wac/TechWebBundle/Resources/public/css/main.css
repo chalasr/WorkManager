@@ -7,6 +7,11 @@ input[type="checkbox"]:checked:after, .checkbox input[type="checkbox"]:checked:a
   border-color: #666666 !important;
 }
 
+.onEdit{
+  text-decoration: none!important;
+  font-style: normal!important;
+}
+
 .completedTask{
   text-decoration: line-through;
   font-style: italic;
