@@ -10,7 +10,7 @@ class ProjectType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,7 +25,7 @@ class ProjectType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wac\TechWebBundle\Entity\Project'
+            'data_class' => 'Wac\TechWebBundle\Entity\Project',
         ));
     }
 

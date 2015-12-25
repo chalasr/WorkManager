@@ -2,22 +2,20 @@
 
 namespace Wac\TechWebBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
 use Wac\TechWebBundle\Entity\Card;
 use Wac\TechWebBundle\Form\CardType;
 
 /**
  * Card controller.
  *
+ * @author Robin Chalas <robin.chalas@gmail.com>
  */
 class CardController extends Controller
 {
-
     /**
      * Lists all Card entities.
-     *
      */
     public function indexAction()
     {
@@ -29,9 +27,13 @@ class CardController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Card entity.
      *
+     * @param Request $request
+     *
+     * @return resource view
      */
     public function createAction(Request $request)
     {
@@ -74,7 +76,6 @@ class CardController extends Controller
 
     /**
      * Displays a form to create a new Card entity.
-     *
      */
     public function newAction()
     {
@@ -90,6 +91,7 @@ class CardController extends Controller
     /**
      * Finds and displays a Card entity.
      *
+     * @param int $id The Card entity
      */
     public function showAction($id)
     {
@@ -112,6 +114,9 @@ class CardController extends Controller
     /**
      * Displays a form to edit an existing Card entity.
      *
+     * @param int $id The Card entity
+     *
+     * @return resource view
      */
     public function editAction($id)
     {
@@ -134,12 +139,12 @@ class CardController extends Controller
     }
 
     /**
-    * Creates a form to edit a Card entity.
-    *
-    * @param Card $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Card entity.
+     *
+     * @param Card $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Card $entity)
     {
         $form = $this->createForm(new CardType(), $entity, array(
@@ -151,9 +156,14 @@ class CardController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Card entity.
      *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return resource view
      */
     public function updateAction(Request $request, $id)
     {
@@ -183,7 +193,6 @@ class CardController extends Controller
     }
     /**
      * Deletes a Card entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {

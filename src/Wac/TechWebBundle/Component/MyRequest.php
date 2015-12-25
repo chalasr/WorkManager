@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MyRequest extends \Symfony\Component\HttpFoundation\Request
 {
-
     /**
      * Creates a new request with values from PHP's super globals.
      *
@@ -19,9 +18,9 @@ class MyRequest extends \Symfony\Component\HttpFoundation\Request
         $request = parent::createFromGlobals();
         $requestBody = $request->getContent();
 
-        if (!empty($requestBody)){
+        if (!empty($requestBody)) {
             $requestBodyData = json_decode($requestBody, true);
-            if (!empty($requestBodyData) && is_array($requestBodyData)){
+            if (!empty($requestBodyData) && is_array($requestBodyData)) {
                 $request->query->add($requestBodyData);
             }
         }

@@ -2,22 +2,18 @@
 
 namespace Wac\TechWebBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
 use Wac\TechWebBundle\Entity\Task;
 use Wac\TechWebBundle\Form\TaskType;
 
 /**
  * Task controller.
- *
  */
 class TaskController extends Controller
 {
-
     /**
      * Lists all Task entities.
-     *
      */
     public function indexAction()
     {
@@ -31,7 +27,6 @@ class TaskController extends Controller
     }
     /**
      * Creates a new Task entity.
-     *
      */
     public function createAction(Request $request)
     {
@@ -74,7 +69,6 @@ class TaskController extends Controller
 
     /**
      * Displays a form to create a new Task entity.
-     *
      */
     public function newAction()
     {
@@ -89,7 +83,6 @@ class TaskController extends Controller
 
     /**
      * Finds and displays a Task entity.
-     *
      */
     public function showAction($id)
     {
@@ -111,7 +104,6 @@ class TaskController extends Controller
 
     /**
      * Displays a form to edit an existing Task entity.
-     *
      */
     public function editAction($id)
     {
@@ -134,12 +126,12 @@ class TaskController extends Controller
     }
 
     /**
-    * Creates a form to edit a Task entity.
-    *
-    * @param Task $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Task entity.
+     *
+     * @param Task $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Task $entity)
     {
         $form = $this->createForm(new TaskType(), $entity, array(
@@ -153,7 +145,6 @@ class TaskController extends Controller
     }
     /**
      * Edits an existing Task entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
@@ -183,7 +174,6 @@ class TaskController extends Controller
     }
     /**
      * Deletes a Task entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {

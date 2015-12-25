@@ -2,22 +2,18 @@
 
 namespace Wac\TechWebBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
 use Wac\TechWebBundle\Entity\Listing;
 use Wac\TechWebBundle\Form\ListingType;
 
 /**
  * Listing controller.
- *
  */
 class ListingController extends Controller
 {
-
     /**
      * Lists all Listing entities.
-     *
      */
     public function indexAction()
     {
@@ -31,7 +27,6 @@ class ListingController extends Controller
     }
     /**
      * Creates a new Listing entity.
-     *
      */
     public function createAction(Request $request)
     {
@@ -74,7 +69,6 @@ class ListingController extends Controller
 
     /**
      * Displays a form to create a new Listing entity.
-     *
      */
     public function newAction()
     {
@@ -89,7 +83,6 @@ class ListingController extends Controller
 
     /**
      * Finds and displays a Listing entity.
-     *
      */
     public function showAction($id)
     {
@@ -111,7 +104,6 @@ class ListingController extends Controller
 
     /**
      * Displays a form to edit an existing Listing entity.
-     *
      */
     public function editAction($id)
     {
@@ -134,12 +126,12 @@ class ListingController extends Controller
     }
 
     /**
-    * Creates a form to edit a Listing entity.
-    *
-    * @param Listing $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Listing entity.
+     *
+     * @param Listing $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Listing $entity)
     {
         $form = $this->createForm(new ListingType(), $entity, array(
@@ -153,7 +145,6 @@ class ListingController extends Controller
     }
     /**
      * Edits an existing Listing entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
@@ -183,7 +174,6 @@ class ListingController extends Controller
     }
     /**
      * Deletes a Listing entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {

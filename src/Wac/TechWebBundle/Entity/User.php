@@ -1,12 +1,12 @@
 <?php
 
 namespace Wac\TechWebBundle\Entity;
-use FOS\UserBundle\Entity\User as BaseUser;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Wac\TechWebBundle\Entity\UserRepository")
@@ -14,12 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
-    * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
-    */
+     * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
+     */
     protected $projects;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -28,16 +28,16 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -46,9 +46,10 @@ class User extends BaseUser
     }
 
     /**
-     * Add projects
+     * Add projects.
      *
      * @param \Wac\TechWebBundle\Entity\Project $projects
+     *
      * @return User
      */
     public function addProject(\Wac\TechWebBundle\Entity\Project $projects)
@@ -59,7 +60,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove projects
+     * Remove projects.
      *
      * @param \Wac\TechWebBundle\Entity\Project $projects
      */
@@ -69,7 +70,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get projects
+     * Get projects.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

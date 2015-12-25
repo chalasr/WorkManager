@@ -5,22 +5,21 @@ namespace Wac\TechWebBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Task
+ * Task.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Wac\TechWebBundle\Entity\TaskRepository")
  */
 class Task
 {
-
-  /**
-   * @ORM\ManyToOne(targetEntity="Card", inversedBy="tasks")
-   * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
-   */
+    /**
+     * @ORM\ManyToOne(targetEntity="Card", inversedBy="tasks")
+     * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
+     */
     protected $card;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -36,17 +35,16 @@ class Task
     private $name;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="done", type="boolean")
      */
     protected $done = false;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -54,9 +52,10 @@ class Task
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Task
      */
     public function setName($name)
@@ -67,7 +66,7 @@ class Task
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -77,9 +76,10 @@ class Task
     }
 
     /**
-     * Set done
+     * Set done.
      *
-     * @param boolean $done
+     * @param bool $done
+     *
      * @return Task
      */
     public function setDone($done)
@@ -90,9 +90,9 @@ class Task
     }
 
     /**
-     * Get done
+     * Get done.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDone()
     {
@@ -100,9 +100,10 @@ class Task
     }
 
     /**
-     * Set card
+     * Set card.
      *
      * @param \Wac\TechWebBundle\Entity\Card $card
+     *
      * @return Task
      */
     public function setCard(\Wac\TechWebBundle\Entity\Card $card = null)
@@ -113,7 +114,7 @@ class Task
     }
 
     /**
-     * Get card
+     * Get card.
      *
      * @return \Wac\TechWebBundle\Entity\Card
      */

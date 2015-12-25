@@ -10,7 +10,7 @@ class CardType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,14 +20,14 @@ class CardType extends AbstractType
             ->add('listing')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wac\TechWebBundle\Entity\Card'
+            'data_class' => 'Wac\TechWebBundle\Entity\Card',
         ));
     }
 

@@ -5,32 +5,31 @@ namespace Wac\TechWebBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Card
+ * Card.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Wac\TechWebBundle\Entity\CardRepository")
  */
 class Card
 {
-
-  public function __toString()
-  {
-      return $this->getName();
-  }
-
-  /**
-    * @ORM\OneToMany(targetEntity="Task", mappedBy="card",  cascade={"remove"})
-    */
-    protected $tasks;
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
-   * @ORM\ManyToOne(targetEntity="Listing", inversedBy="cards")
-   * @ORM\JoinColumn(name="listing_id", referencedColumnName="id")
-   */
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="card",  cascade={"remove"})
+     */
+    protected $tasks;
+
+   /**
+    * @ORM\ManyToOne(targetEntity="Listing", inversedBy="cards")
+    * @ORM\JoinColumn(name="listing_id", referencedColumnName="id")
+    */
    protected $listing;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -52,11 +51,10 @@ class Card
      */
     private $description;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -64,9 +62,10 @@ class Card
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Card
      */
     public function setName($name)
@@ -77,7 +76,7 @@ class Card
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -87,9 +86,10 @@ class Card
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return Card
      */
     public function setDescription($description)
@@ -100,7 +100,7 @@ class Card
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -110,9 +110,10 @@ class Card
     }
 
     /**
-     * Set listing
+     * Set listing.
      *
      * @param \Wac\TechWebBundle\Entity\Listing $listing
+     *
      * @return Card
      */
     public function setListing(\Wac\TechWebBundle\Entity\Listing $listing = null)
@@ -123,7 +124,7 @@ class Card
     }
 
     /**
-     * Get listing
+     * Get listing.
      *
      * @return \Wac\TechWebBundle\Entity\Listing
      */
@@ -132,7 +133,7 @@ class Card
         return $this->listing;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -140,9 +141,10 @@ class Card
     }
 
     /**
-     * Add tasks
+     * Add tasks.
      *
      * @param \Wac\TechWebBundle\Entity\Task $tasks
+     *
      * @return Card
      */
     public function addTask(\Wac\TechWebBundle\Entity\Task $tasks)
@@ -153,7 +155,7 @@ class Card
     }
 
     /**
-     * Remove tasks
+     * Remove tasks.
      *
      * @param \Wac\TechWebBundle\Entity\Task $tasks
      */
@@ -163,7 +165,7 @@ class Card
     }
 
     /**
-     * Get tasks
+     * Get tasks.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

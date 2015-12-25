@@ -5,33 +5,31 @@ namespace Wac\TechWebBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Listing
+ * Listing.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Wac\TechWebBundle\Entity\ListingRepository")
  */
 class Listing
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
-  public function __toString()
-  {
-      return $this->getName();
-  }
-
-  /**
-    * @ORM\OneToMany(targetEntity="Card", mappedBy="listing",  cascade={"remove"})
-    */
+    /**
+     * @ORM\OneToMany(targetEntity="Card", mappedBy="listing",  cascade={"remove"})
+     */
     protected $cards;
 
-
-  /**
-   * @ORM\ManyToOne(targetEntity="Project", inversedBy="listings")
-   * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
-   */
+   /**
+    * @ORM\ManyToOne(targetEntity="Project", inversedBy="listings")
+    * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+    */
    protected $project;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -46,11 +44,10 @@ class Listing
      */
     private $name;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -58,9 +55,10 @@ class Listing
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Listing
      */
     public function setName($name)
@@ -71,7 +69,7 @@ class Listing
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -81,9 +79,10 @@ class Listing
     }
 
     /**
-     * Set project
+     * Set project.
      *
      * @param \Wac\TechWebBundle\Entity\Project $project
+     *
      * @return Listing
      */
     public function setProject(\Wac\TechWebBundle\Entity\Project $project = null)
@@ -94,7 +93,7 @@ class Listing
     }
 
     /**
-     * Get project
+     * Get project.
      *
      * @return \Wac\TechWebBundle\Entity\Project
      */
@@ -103,7 +102,7 @@ class Listing
         return $this->project;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -111,9 +110,10 @@ class Listing
     }
 
     /**
-     * Add cards
+     * Add cards.
      *
      * @param \Wac\TechWebBundle\Entity\Card $cards
+     *
      * @return Listing
      */
     public function addCard(\Wac\TechWebBundle\Entity\Card $cards)
@@ -124,7 +124,7 @@ class Listing
     }
 
     /**
-     * Remove cards
+     * Remove cards.
      *
      * @param \Wac\TechWebBundle\Entity\Card $cards
      */
@@ -134,7 +134,7 @@ class Listing
     }
 
     /**
-     * Get cards
+     * Get cards.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

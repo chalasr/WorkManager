@@ -5,56 +5,54 @@ namespace Wac\TechWebBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Project
+ * Project.
  *
  * @ORM\Table()
  * @ORM\Entity
  */
 class Project
 {
-
-  public function __toString()
-  {
-      return $this->getName();
-  }
-
-  /**
-   * @ORM\ManyToMany(targetEntity="User", inversedBy="projects", cascade={"persist"})
-   * @ORM\JoinTable(name="project_user",
-   *     joinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
-   * )
-   *
-   * @var ArrayCollection $users
-   */
-    protected $users;
-
-  /**
-   * @ORM\OneToMany(targetEntity="Listing", mappedBy="project",  cascade={"remove"})
-   */
-    protected $listings;
-
-  /**
-    * @var integer
-    *
-    * @ORM\Column(name="id", type="integer")
-    * @ORM\Id
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
-    private $id;
-
-  /**
-    * @var string
-    *
-    * @ORM\Column(name="name", type="string", length=255)
-    */
-    protected $name;
-
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
-     * Get id
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="projects", cascade={"persist"})
+     * @ORM\JoinTable(name="project_user",
+     *     joinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
      *
-     * @return integer
+     * @var ArrayCollection
+     */
+    protected $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Listing", mappedBy="project",  cascade={"remove"})
+     */
+    protected $listings;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * Get id.
+     *
+     * @return int
      */
     public function getId()
     {
@@ -62,9 +60,10 @@ class Project
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Project
      */
     public function setName($name)
@@ -75,7 +74,7 @@ class Project
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,7 +83,7 @@ class Project
         return $this->name;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -92,9 +91,10 @@ class Project
     }
 
     /**
-     * Add listings
+     * Add listings.
      *
      * @param \Wac\TechWebBundle\Entity\Listing $listings
+     *
      * @return Project
      */
     public function addListing(\Wac\TechWebBundle\Entity\Listing $listings)
@@ -105,7 +105,7 @@ class Project
     }
 
     /**
-     * Remove listings
+     * Remove listings.
      *
      * @param \Wac\TechWebBundle\Entity\Listing $listings
      */
@@ -115,7 +115,7 @@ class Project
     }
 
     /**
-     * Get listings
+     * Get listings.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -125,9 +125,10 @@ class Project
     }
 
     /**
-     * Add users
+     * Add users.
      *
      * @param \Wac\TechWebBundle\Entity\User $users
+     *
      * @return Project
      */
     public function addUser(\Wac\TechWebBundle\Entity\User $users)
@@ -138,7 +139,7 @@ class Project
     }
 
     /**
-     * Remove users
+     * Remove users.
      *
      * @param \Wac\TechWebBundle\Entity\User $users
      */
@@ -148,7 +149,7 @@ class Project
     }
 
     /**
-     * Get users
+     * Get users.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
